@@ -12,4 +12,4 @@ RUN chmod +x /usr/local/bin/*.sh
 
 ENTRYPOINT ["docker-entrypoint.sh"]
 
-RUN ["tail", "-f", "/var/log/backup.log"]
+CMD ["tail", "-f", "/var/log/backup.log"]

@@ -24,7 +24,7 @@ backup_db() {
 }
 
 upload() {
-    curl -F chat_id=$CHAT_ID -F document=@"$1" https://api.telegram.org/$BOT_TOKEN/sendDocument  > /dev/null
+    curl -F chat_id=$CHAT_ID -F document=@"$1" https://api.telegram.org/bot$BOT_TOKEN/sendDocument  > /dev/null
     rm -f $1
 }
 

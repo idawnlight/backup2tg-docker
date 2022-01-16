@@ -6,6 +6,7 @@
 
 dir_list=$(echo $BACKUP_DIR | tr ";" "\n")
 db_list=$(echo $BACKUP_DB | tr ";" "\n")
+postgres_list=$(echo $BACKUP_POSTGRES_DB | tr ";" "\n")
 date=$(date +"%Y%m%d")
 
 backup_dir() {
@@ -18,8 +19,14 @@ backup_dir() {
 }
 
 backup_db() {
-    filename=/tmp/db-$1-$date.sql
+    filename=/tmp/mysql-db-$1-$date.sql
     mysqldump -u$MYSQL_USERNAME -p$MYSQL_PASSWORD -P $MYSQL_PORT -h $MYSQL_HOST $1 > $filename
+    upload $filename
+}
+
+backup_postgres() {
+    filename=/tmp/postgres-db-$1-$date.sql
+    pg_dump "$POSTGRES_CONNECTION_URI/$1" > $filename
     upload $filename
 }
 
@@ -34,6 +41,10 @@ done
 
 for dd in ${db_list[@]};do
     backup_db ${dd}
+done
+
+for dd in ${postgres_list[@]};do
+    backup_postgres ${dd}
 done
 
 exit 0

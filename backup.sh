@@ -8,6 +8,7 @@ dir_list=$(echo $BACKUP_DIR | tr ";" "\n")
 db_list=$(echo $BACKUP_DB | tr ";" "\n")
 postgres_list=$(echo $BACKUP_POSTGRES_DB | tr ";" "\n")
 date=$(date +"%Y%m%d")
+bot_api="${BOT_API:-https://api.telegram.org}"
 
 backup_dir() {
     backup_path=$1
@@ -31,7 +32,7 @@ backup_postgres() {
 }
 
 upload() {
-    curl -F chat_id=$CHAT_ID -F document=@"$1" https://api.telegram.org/bot$BOT_TOKEN/sendDocument  > /dev/null
+    curl -F chat_id=$CHAT_ID -F document=@"$1" $bot_api/bot$BOT_TOKEN/sendDocument  > /dev/null
     rm -f $1
 }
 

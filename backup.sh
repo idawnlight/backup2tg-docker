@@ -1,7 +1,6 @@
 #!/bin/bash
 
 # Backup important files to telegram
-# 2019/6/5
 # credit @xtaodada
 
 dir_list=$(echo $BACKUP_DIR | tr ";" "\n")

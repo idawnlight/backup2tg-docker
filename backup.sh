@@ -25,8 +25,8 @@ backup_db() {
 }
 
 backup_postgres() {
-    filename=/tmp/postgres-db-$1-$date.sql
-    pg_dump "$POSTGRES_CONNECTION_URI/$1" > $filename
+    filename=/tmp/postgres-db-$1-$date.pgdump
+    pg_dump -Fc "$POSTGRES_CONNECTION_URI/$1" > $filename
     upload $filename
 }
 

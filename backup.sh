@@ -20,7 +20,7 @@ backup_dir() {
 
 backup_db() {
     filename=/tmp/mysql-db-$1-$date.sql
-    mysqldump -u$MYSQL_USERNAME -p$MYSQL_PASSWORD -P $MYSQL_PORT -h $MYSQL_HOST $1 > $filename
+    mariadb-dump --skip-ssl -u$MYSQL_USERNAME -p$MYSQL_PASSWORD -P $MYSQL_PORT -h $MYSQL_HOST $1 > $filename
     upload $filename
 }
 
